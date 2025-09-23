@@ -1,0 +1,35 @@
+{
+  "name": "ponpoco-game",
+  "version": "1.0.0",
+  "description": "A retro-style 2D platform game featuring a cute raccoon character",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . --listen 3000",
+    "build": "echo 'No build step required for static files'",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "game",
+    "platform",
+    "retro",
+    "html5",
+    "canvas",
+    "javascript",
+    "raccoon",
+    "ponpoko"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ponpoco-game.git"
+  },
+  "homepage": "https://github.com/your-username/ponpoco-game#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
