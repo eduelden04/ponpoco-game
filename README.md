@@ -47,7 +47,124 @@
 
 ## 🚀 배포 및 실행
 
-### 로컬 실행
+### 🔧 GitHub Codespaces에서 실행 (권장)
+
+1. **Codespace 생성**
+   ```bash
+   # GitHub에서 "Code" → "Codespaces" → "Create codespace on main" 클릭
+   ```
+
+2. **자동 설정 완료 대기**
+   - Codespace가 시작되면 자동으로 필요한 도구들이 설치됩니다
+   - Azure Developer CLI (azd)가 자동으로 설치됩니다
+   - Bash 스크립트 실행 권한이 자동으로 설정됩니다
+
+3. **개발 환경 확인**
+   ```bash
+   npm run setup
+   # 또는 직접 스크립트 실행
+   ./scripts/setup.sh
+   ```
+
+4. **게임 로컬 실행**
+   ```bash
+   npm start
+   ```
+
+5. **Azure 로그인 (디바이스 코드 방식)**
+   ```bash
+   npm run azure-login
+   # 또는
+   azd auth login --use-device-code
+   ```
+   - 브라우저에서 https://microsoft.com/devicelogin 접속
+   - 터미널에 표시된 코드 입력
+   - Azure 계정으로 로그인
+
+6. **Azure에 배포**
+   ```bash
+   npm run deploy
+   # 또는 직접 스크립트 실행
+   ./scripts/deploy.sh
+   ```
+
+### 📜 Bash 스크립트 명령어
+
+```bash
+./scripts/setup.sh     # 개발 환경 설정 및 상태 확인
+./scripts/clean.sh     # 개발 환경 정리 (node_modules, 캐시 등)
+./scripts/logs.sh      # Azure 로그 및 배포 상태 확인
+./scripts/deploy.sh    # Azure 자동 배포
+```
+
+### 🖥️ 로컬 개발 환경에서 실행
+
+#### Linux/macOS/WSL에서 설치
+```bash
+# Azure Developer CLI 설치
+curl -fsSL https://aka.ms/install-azd.sh | bash
+
+# 프로젝트 설정
+npm install
+chmod +x scripts/*.sh
+./scripts/setup.sh
+```
+
+#### Linux/macOS에서 설치
+```bash
+# 자동 설치 스크립트 실행
+chmod +x scripts/setup-azure.sh
+./scripts/setup-azure.sh
+
+# 또는 수동 설치
+curl -fsSL https://aka.ms/install-azd.sh | bash
+```
+
+#### Azure Developer CLI 설치 확인
+```bash
+azd version
+```
+
+#### Azure 로그인
+```bash
+# 디바이스 코드 방식 (Codespaces/원격 환경에서 권장)
+azd auth login --use-device-code
+
+# 또는 브라우저 방식 (로컬 환경)
+azd auth login
+```
+
+#### 프로젝트 초기화 및 배포
+```bash
+# 프로젝트 디렉토리로 이동
+cd ponpoco-game
+
+# Azure 프로젝트 초기화
+azd init
+
+# Azure에 배포
+azd up
+```
+
+### 🌐 Azure Static Web Apps 수동 배포
+
+1. **Azure Portal 접속**
+   - [Azure Portal](https://portal.azure.com) 로그인
+
+2. **Static Web App 리소스 생성**
+   - "Create a resource" → "Static Web App" 검색
+   - GitHub 리포지토리 연결
+
+3. **배포 설정**
+   - **App location**: `/`
+   - **Api location**: `` (빈 값)
+   - **Output location**: `` (빈 값)
+
+4. **자동 배포 확인**
+   - GitHub Actions 워크플로우가 자동 생성됨
+   - 코드 푸시 시 자동 배포
+
+### 로컬 실행 (기본)
 ```bash
 # 프로젝트 클론
 git clone https://github.com/your-username/ponpoco-game.git
@@ -61,29 +178,12 @@ npx serve .
 # 브라우저에서 http://localhost:8000 접속
 ```
 
-### Azure Static Web Apps 배포
+### 📱 배포 URL 확인
 
-이 프로젝트는 Azure Static Web Apps를 통해 쉽게 배포할 수 있습니다.
-
-#### Azure Developer CLI (azd) 사용
-
-```bash
-# Azure Developer CLI 설치 (필요한 경우)
-# https://docs.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd
-
-# 프로젝트 초기화
-azd init
-
-# Azure에 배포
-azd up
-```
-
-#### GitHub Actions 자동 배포
-
-1. GitHub에 리포지토리 생성
-2. Azure Portal에서 Static Web App 리소스 생성
-3. GitHub 연동 시 자동으로 워크플로우 생성됨
-4. 코드 푸시 시 자동 배포
+배포 완료 후 다음 위치에서 URL 확인 가능:
+- Azure Portal → Static Web Apps → Overview → URL
+- GitHub Actions → 워크플로우 실행 결과
+- `azd up` 명령어 실행 후 터미널 출력
 
 ## 🛠️ 개발 환경
 

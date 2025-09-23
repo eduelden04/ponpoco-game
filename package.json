@@ -4,10 +4,15 @@
   "description": "A retro-style 2D platform game featuring a cute raccoon character",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve .",
+    "start": "npx serve . --listen 3000",
     "dev": "npx serve . --listen 3000",
     "build": "echo 'No build step required for static files'",
-    "test": "echo 'No tests specified'"
+    "test": "echo 'No tests specified'",
+    "setup": "./scripts/setup.sh",
+    "deploy": "./scripts/deploy.sh",
+    "azure-login": "azd auth login --use-device-code",
+    "clean": "./scripts/clean.sh",
+    "logs": "./scripts/logs.sh"
   },
   "keywords": [
     "game",
