@@ -18,6 +18,6 @@
     }
   },
   "forwardPorts": [3000, 8000, 5000],
-  "postCreateCommand": "npm install && chmod +x scripts/*.sh && echo '🦝 Ponpoco Game Development Environment Ready!'",
-  "postStartCommand": "echo '🦝 Ponpoco Game Codespace Ready!' && echo '💡 Run: npm start to serve the game' && echo '🚀 Run: npm run azure-login for Azure authentication' && echo '⚡ Bash scripts ready in ./scripts/ directory'"
+  "postCreateCommand": "npm install && echo '🦝 Ponpoco Game Development Environment Ready!'",
+  "postStartCommand": "echo '🦝 Ponpoco Game Codespace Ready!' && echo '💡 Run: npm start to serve the game' && echo '🌐 Game will be available on forwarded port 3000'"
 }

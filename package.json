@@ -7,12 +7,7 @@
     "start": "npx serve . --listen 3000",
     "dev": "npx serve . --listen 3000",
     "build": "echo 'No build step required for static files'",
-    "test": "echo 'No tests specified'",
-    "setup": "./scripts/setup.sh",
-    "deploy": "./scripts/deploy.sh",
-    "azure-login": "azd auth login --use-device-code",
-    "clean": "./scripts/clean.sh",
-    "logs": "./scripts/logs.sh"
+    "test": "echo 'No tests specified'"
   },
   "keywords": [
     "game",

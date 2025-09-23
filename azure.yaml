@@ -1,8 +1,0 @@
-name: ponpoco-game
-metadata:
-  template: ponpoco-game@0.0.1-beta
-services:
-  web:
-    project: .
-    language: js
-    host: staticwebapp

@@ -193,6 +193,29 @@
 
     <div class="stage-clear" id="stageClear">STAGE CLEAR!</div>
 
-    <script src="js/game.js"></script>
+    <!-- JavaScript 파일을 명시적인 MIME type과 함께 로드 -->
+    <script type="application/javascript" src="./js/game.js"></script>
+    <script type="application/javascript">
+        // 스크립트 로딩 확인
+        console.log('🎮 Ponpoco Game - Script loading started');
+        
+        // DOM이 준비되면 게임 초기화 확인
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📱 DOM ready, checking game initialization...');
+            if (typeof window.canvas !== 'undefined' && window.canvas) {
+                console.log('✅ Game canvas initialized successfully');
+            } else {
+                console.log('⏳ Waiting for game initialization...');
+                // 게임 초기화를 위한 추가 시간 제공
+                setTimeout(function() {
+                    if (typeof window.canvas !== 'undefined' && window.canvas) {
+                        console.log('✅ Game initialized after delay');
+                    } else {
+                        console.error('❌ Game initialization failed');
+                    }
+                }, 1000);
+            }
+        });
+    </script>
 </body>
 </html>
