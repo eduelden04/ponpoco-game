@@ -194,27 +194,52 @@
     <div class="stage-clear" id="stageClear">STAGE CLEAR!</div>
 
     <!-- JavaScript 파일을 명시적인 MIME type과 함께 로드 -->
-    <script type="application/javascript" src="./js/game.js"></script>
-    <script type="application/javascript">
+    <script type="text/javascript" src="./js/game.js?v=20250924" defer></script>
+    <script type="text/javascript">
         // 스크립트 로딩 확인
         console.log('🎮 Ponpoco Game - Script loading started');
+        
+        // 스크립트 로딩 에러 처리
+        window.addEventListener('error', function(e) {
+            if (e.filename && e.filename.includes('game.js')) {
+                console.error('❌ Game script loading failed:', e.message);
+                console.error('📄 File:', e.filename);
+                console.error('🔍 Try refreshing the page or clearing browser cache');
+            }
+        });
         
         // DOM이 준비되면 게임 초기화 확인
         document.addEventListener('DOMContentLoaded', function() {
             console.log('📱 DOM ready, checking game initialization...');
-            if (typeof window.canvas !== 'undefined' && window.canvas) {
-                console.log('✅ Game canvas initialized successfully');
-            } else {
-                console.log('⏳ Waiting for game initialization...');
-                // 게임 초기화를 위한 추가 시간 제공
-                setTimeout(function() {
-                    if (typeof window.canvas !== 'undefined' && window.canvas) {
-                        console.log('✅ Game initialized after delay');
-                    } else {
-                        console.error('❌ Game initialization failed');
-                    }
-                }, 1000);
+            
+            // 게임 초기화 대기 및 재시도 로직
+            let retryCount = 0;
+            const maxRetries = 10;
+            
+            function checkGameInit() {
+                if (typeof window.canvas !== 'undefined' && window.canvas) {
+                    console.log('✅ Game canvas initialized successfully');
+                    return true;
+                } else if (typeof window.gameLoop === 'function') {
+                    console.log('✅ Game loop function found');
+                    return true;
+                } else if (retryCount < maxRetries) {
+                    retryCount++;
+                    console.log(`⏳ Waiting for game initialization... (${retryCount}/${maxRetries})`);
+                    setTimeout(checkGameInit, 500);
+                    return false;
+                } else {
+                    console.error('❌ Game initialization failed after', maxRetries, 'attempts');
+                    console.error('🔧 Troubleshooting:');
+                    console.error('   1. Check if game.js is loaded correctly');
+                    console.error('   2. Clear browser cache and refresh');
+                    console.error('   3. Check browser console for errors');
+                    return false;
+                }
             }
+            
+            // 초기 확인 시작
+            setTimeout(checkGameInit, 100);
         });
     </script>
 </body>

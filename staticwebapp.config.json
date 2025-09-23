@@ -1,25 +1,39 @@
 {
   "routes": [
     {
-      "route": "/js/*",
+      "route": "/js/*.js",
       "headers": {
-        "Content-Type": "application/javascript; charset=utf-8"
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "no-cache"
       }
     },
     {
       "route": "/*.js",
       "headers": {
-        "Content-Type": "application/javascript; charset=utf-8"
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "no-cache"
+      }
+    },
+    {
+      "route": "/js/*",
+      "headers": {
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "no-cache"
       }
     },
     {
       "route": "/",
       "rewrite": "/index.html"
+    },
+    {
+      "route": "/*",
+      "rewrite": "/index.html",
+      "statusCode": 404
     }
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/js/*", "/*.js", "/*.css", "/*.png", "/*.jpg", "/*.gif", "/*.ico"]
+    "exclude": ["/js/*", "/*.js", "/*.css", "/*.png", "/*.jpg", "/*.gif", "/*.ico", "/favicon.ico"]
   },
   "mimeTypes": {
     ".js": "application/javascript",
@@ -28,11 +42,14 @@
     ".json": "application/json"
   },
   "globalHeaders": {
-    "Cache-Control": "public, max-age=31536000"
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block"
   },
   "responseOverrides": {
     "404": {
-      "rewrite": "/index.html"
+      "rewrite": "/index.html",
+      "statusCode": 200
     }
   }
 }
