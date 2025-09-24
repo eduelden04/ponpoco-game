@@ -24,12 +24,8 @@
     {
       "route": "/",
       "rewrite": "/index.html"
-    },
-    {
-      "route": "/*",
-      "rewrite": "/index.html",
-      "statusCode": 404
     }
+    // 문제가 되었던 마지막 규칙을 여기에서 삭제했습니다.
   ],
   "navigationFallback": {
     "rewrite": "/index.html",
