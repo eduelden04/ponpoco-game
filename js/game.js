@@ -33,7 +33,7 @@ var player = {
     invincible: 0,
     animation: 0,
     jumpCount: 0,
-    maxJumps: 1
+    maxJumps: 2
 };
 
 // 게임 객체들
@@ -184,6 +184,7 @@ function createStage(stageNum) {
     player.vy = 0;
     player.invincible = 60;
     player.jumpCount = 0;
+    player.maxJumps = 2;
 }
 
 // 키보드 이벤트
@@ -563,6 +564,7 @@ function resetGame() {
     player.throwCooldown = 0;
     player.invincible = 60;
     player.jumpCount = 0;
+    player.maxJumps = 2;
     
     particles = [];
     
