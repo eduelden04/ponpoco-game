@@ -33,7 +33,7 @@ var player = {
     invincible: 0,
     animation: 0,
     jumpCount: 0,
-    maxJumps: 2
+    maxJumps: 1
 };
 
 // 게임 객체들
